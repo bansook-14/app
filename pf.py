@@ -1,7 +1,5 @@
 import streamlit as st
 import pandas as pd
-import qrcode
-from io import BytesIO
 
 st.set_page_config(page_title="학급 투표/설문 앱", layout="wide")
 st.title("📊 학급 투표 / 설문 앱")
@@ -47,16 +45,6 @@ if entered_password == teacher_password:
             "votes": {opt: 0 for opt in options},
             "responses": {}
         })
-
-    # QR코드 생성
-    st.sidebar.markdown("---")
-    st.sidebar.subheader("📱 QR코드 공유")
-    url = st.sidebar.text_input("학생들이 접속할 앱 URL 입력", "http://localhost:8501")
-    if st.sidebar.button("QR코드 생성"):
-        qr = qrcode.make(url)
-        buf = BytesIO()
-        qr.save(buf, format="PNG")
-        st.sidebar.image(buf.getvalue(), caption="QR코드", use_container_width=True)
 
     # 초기화
     st.sidebar.markdown("---")
